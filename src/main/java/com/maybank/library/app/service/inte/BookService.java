@@ -17,6 +17,8 @@ public interface BookService {
 	
 	List<Book> getBookByAuthor(String author);
 	
+	Book assignStudent(long id,int studentId);
+	
 	
 
 }

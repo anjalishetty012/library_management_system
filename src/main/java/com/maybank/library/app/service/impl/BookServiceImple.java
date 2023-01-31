@@ -2,18 +2,23 @@ package com.maybank.library.app.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maybank.library.app.exception.ResourceNotFoundException;
 import com.maybank.library.app.model.Book;
+import com.maybank.library.app.model.Student;
 import com.maybank.library.app.repository.BookRepository;
+import com.maybank.library.app.repository.StudentRepository;
 import com.maybank.library.app.service.inte.BookService;
 
 @Service
 public class BookServiceImple implements BookService{
 
 private BookRepository bookRepository;
-	
+
+    @Autowired
+	private StudentRepository studentRepository;
 	
 	public BookServiceImple(BookRepository bookRepository) {
 		super();
@@ -79,8 +84,23 @@ private BookRepository bookRepository;
 
 	@Override
 	public List<Book> getBookByAuthor(String author) {
-		return bookRepository.getBookByAuthor(author);
+		//return bookRepository.getBookByAuthor(author);
+		return bookRepository.findByAuthor(author);
 	
+	}
+
+
+
+
+	@Override
+	public Book assignStudent(long id, int studentId) {
+		Book book=bookRepository.findById(id).get();
+		
+		Student student=studentRepository.findById(studentId).get();
+		book.setStudent(student);
+		return bookRepository.save(book);
+		
+		
 	}
 
 		

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maybank.library.app.model.Book;
+import com.maybank.library.app.model.Student;
+import com.maybank.library.app.repository.BookRepository;
+import com.maybank.library.app.repository.StudentRepository;
 import com.maybank.library.app.service.inte.BookService;
 
 import jakarta.validation.Valid;
@@ -24,7 +27,6 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/books")
 public class BookController {
 	private BookService bookService;
-
 	public BookController(BookService bookService) {
 		super();
 		this.bookService = bookService;
@@ -37,12 +39,12 @@ public class BookController {
 		
 	}
 	
-	@GetMapping
+	@GetMapping("/getAll")
 	public List<Book> getAllBooks(){
 		return bookService.getAllBooks();
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/getBookById/{id}")
 	public ResponseEntity<Book> getBookById(@PathVariable("id") long id){
 		
 		return new ResponseEntity<Book>(bookService.getBookById(id),HttpStatus.OK);
@@ -72,6 +74,25 @@ public class BookController {
 		return bookService.getBookByAuthor(author);
 	
 	}
+	
+	@PutMapping("/{id}/student/{studentId}")
+	public Book assignStudentToBook(@PathVariable Long id,
+			@PathVariable Integer studentId) {
+	     return bookService.assignStudent(id,studentId );
+	}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

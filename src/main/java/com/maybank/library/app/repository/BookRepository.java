@@ -10,7 +10,9 @@ import com.maybank.library.app.model.Book;
 
 public interface BookRepository extends JpaRepository<Book,Long>{
 	
-	@Query("select b FROM Book b WHERE b.author=:a")
-	public List<Book> getBookByAuthor(@Param("a")String author);
+
+	
+	public List<Book> findByAuthor(String author);
+	
 		
 }
