@@ -69,16 +69,24 @@ public class BookController {
 		
 	}
 	
-	@GetMapping("/getBookByAuthor/{author}")
-	public List<Book> getBookByAuthor(@PathVariable String author){
-		return bookService.getBookByAuthor(author);
+//	@GetMapping("/getBookByAuthor/{author}")
+//	public List<Book> getBookByAuthor(@PathVariable String author){
+//		return bookService.getBookByAuthor(author);
+//	
+//	}
 	
-	}
-	
+	//To show to many-to-one mapping
 	@PutMapping("/{id}/student/{studentId}")
 	public Book assignStudentToBook(@PathVariable Long id,
 			@PathVariable Integer studentId) {
 	     return bookService.assignStudent(id,studentId );
+	}
+	
+	// To show many-to-many mapping
+	@PutMapping("/{id}/author/{authorId}")
+	public Book assignAuthorToBooks(@PathVariable Long id,
+			@PathVariable Long authorId) {
+	     return bookService.assignAuthorToBooks(id,authorId );
 	}
 			
 	
